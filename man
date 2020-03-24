@@ -1,2 +1,35 @@
 1. Start server
     $ php bin/console server:run
+
+
+2. Create database
+    $ php bin/console doctrine:database:create
+
+3. Create Entity
+    $ php bin/console make:entity
+
+4. Create a migration
+    $ php bin/console make:migration
+
+5.Run the migration
+    $ php bin/console doctrine:migrations:migrate
+
+6. Add some new fields to old Entity
+       $ php bin/console make:entity Property
+
+
+
+
+
+
+
+
+--------------------------------
+
+Slugify
+
+URl: https://github.com/cocur/slugify
+
+$ composer require cocur/slugify
+
+add "use Cocur\Slugify\Slugify;" in Entity
