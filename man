@@ -17,10 +17,15 @@
 6. Add some new fields to old Entity
        $ php bin/console make:entity Property
 
+------
+
+6. Generate Form
+    $ php bin/console make:form
 
 
+    css: form_themes: ['bootstrap_4_layout.html.twig'] => config/packages/twig.yaml
 
-
+    language : config/packages/translation.yaml, translations/forms.fr.yaml
 
 
 
