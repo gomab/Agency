@@ -5,8 +5,9 @@ namespace App\Controller;
 use App\Entity\Property;
 use App\Repository\PropertyRepository;
 use Doctrine\Persistence\ObjectManager;
-use http\Env\Response;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -32,37 +33,32 @@ class PropertyController extends AbstractController
     /**
      * @Route("/biens", name="property.index")
      */
-    public function index()
+    public function index(PaginatorInterface $paginator, Request $request)
     {
-        //Create Entity
-        /*
-        $property = new Property();
-        $property->setTitle('Mon premier bien')
-            ->setPrice(2000000)
-            ->setRooms(4)
-            ->setBedrooms(3)
-            ->setDescription('Une petit description')
-            ->setSurface(60)
-            ->setFloor(4)
-            ->setHeat(1)
-            ->setCity('Paris')
-            ->setAddress('9 rue Jorge semprun')
-            ->setPostalCode('75012');
+        $properties = $paginator->paginate(
+            $this->repository->findAllVisibleQuery(),
+            $request->query->getInt('page', 1),
+            12
+        );
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($property);
-        $em->flush();
-        */
-
-       // $repository = $this->getDoctrine()->getRepository(Property::class);
-
-        /*$property = $this->repository->findAllVisible();
-
-        $this->em->flush();*/
         return $this->render('property/index.html.twig', [
-            'current_menu' => 'properties'
+            'current_menu' => 'properties',
+            'properties'   => $properties
         ]);
     }
+
+    /*** Sans pagination
+     *  public function index()
+    {
+
+    $properties = $this->repository->findAllVisible();
+
+    return $this->render('property/index.html.twig', [
+    'current_menu' => 'properties',
+    'properties'   => $properties
+    ]);
+    }
+     */
 
     /**
      * Show property

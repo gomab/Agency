@@ -8,5 +8,18 @@
 
         <p>Voir tous nos biens</p>
 
+        <div class="row">
+            {% for property in properties %}
+                <div class="col-md-4">
+                    {% include 'property/_property.html.twig' %}
+                </div>
+            {% endfor %}
+        </div>
+
+        {# display navigation #}
+        <div class="navigation">
+            {{ knp_pagination_render(properties) }}
+        </div>
+
     </div>
 {% endblock %}

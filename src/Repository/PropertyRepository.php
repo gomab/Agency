@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Property;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 
 /**
@@ -21,16 +22,25 @@ class PropertyRepository extends ServiceEntityRepository
     }
 
     /**
-     * Tous les biens non vendu
-     * @return Property[]
+     * Tous les biens non vendu (Avec pagination)
+     * @return Query
      */
-    public  function findAllVisible():array
+    public  function findAllVisibleQuery():Query
     {
         return $this->findVisibleQuery('p')
-            ->getQuery()
-            ->getResult();
+            ->getQuery();
     }
 
+
+    /**Sans pagination
+     *    public  function findAllVisible():array
+        {
+        return $this->findVisibleQuery('p')
+        ->getQuery()
+        ->getResult();
+        }
+
+     */
     /**
      * Les 4 derniers biens
      * @return array

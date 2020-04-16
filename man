@@ -88,49 +88,48 @@ __________________DEBUGER LA CONFIG DES COMPOSANTS___________________
 
 
 
+-----------------------
+7.Pagination
+    - $ composer require knplabs/knp-paginator-bundle
+
+    - config/packages/knpPaginator.yaml
+
+    - src/Repository/PropertyRepository.php
+
+      /**
+         * Tous les biens non vendu (Avec pagination)
+         * @return Query
+         */
+        public  function findAllVisibleQuery():Query
+        {
+            return $this->findVisibleQuery('p')
+                ->getQuery();
+        }
 
 
-security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
-    providers:
-        from_database:
-            entity:
-                class: App\Entity\User
-                property: username
+    - PropertyController.php
+        /**
+         * @Route("/biens", name="property.index")
+         */
+        public function index(PaginatorInterface $paginator, Request $request)
+        {
+            $properties = $paginator->paginate(
+                $this->repository->findAllVisibleQuery(),
+                $request->query->getInt('page', 1),
+                12
+            );
 
-        #users_in_memory:
-            #memory:
-                #users:
-                    #demo:
-                        #password: demo
-                        #roles: ROLE_ADMIN
-    firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-        main:
-            anonymous: lazy
-            logout:
-                path: /logout
-                target: /
-            #provider: users_in_memory
+            return $this->render('property/index.html.twig', [
+                'current_menu' => 'properties',
+                'properties'   => $properties
+            ]);
+        }
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
 
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-            #http_basic: true
-            form_login:
-                check_path: login
+    -  index.html.twig
+            {# display navigation #}
+              <div class="navigation">
+                  {{ knp_pagination_render(properties) }}
+              </div>
 
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
-    access_control:
-         - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
-
-    encoders:
-        App\Entity\User:
-            algorithm: bcrypt
-            cost: 12
+    - translations/knpPaginatorBundle.fr.yaml
