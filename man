@@ -133,3 +133,64 @@ __________________DEBUGER LA CONFIG DES COMPOSANTS___________________
               </div>
 
     - translations/knpPaginatorBundle.fr.yaml
+
+
+------------------------------
+8. Recherche
+    - Créer une entité qui va représenter notre recherche
+        src/Entity/PropertySearch.php
+
+    - Créer un formulaire
+        * $ php bin/console make:form
+        * PropertySearchType  (name of class)
+        *  \App\Entity\PropertySearch (name of entity)
+
+        * src/Form/PropertySearchType.php
+
+
+    - Gérer le traitement dans le formulaire
+       public function index(PaginatorInterface $paginator, Request $request) --> src/Controller/PropertyController.php
+
+    - Repository (src/Repository/PropertyRepository.php)
+         public  function findAllVisibleQuery(PropertySearch $search):Query
+            {
+                $query = $this->findVisibleQuery();
+
+                if ($search->getMaxPrice()){
+                    $query = $query
+                            ->andWhere('p.price <= :maxprice')
+                            ->setParameter('maxprice', $search->getMaxPrice());
+                }
+
+                if ($search->getMinSurface()){
+                    $query = $query
+                        ->andWhere('p.surface >= :minsurface')
+                        ->setParameter('minsurface', $search->getMinSurface());
+                }
+
+                return  $query->getQuery();
+            }
+
+
+
+    - Affichage (templates/property/index.html.twig)
+
+         <div class="jumbotron">
+            <div class="container">
+                {{ form_start(form) }}
+                <div class="form-row align-items-end">
+                    <div class="col">
+                        {{ form_row(form.minSurface) }}
+                    </div>
+                    <div class="col">
+                        {{ form_row(form.maxPrice) }}
+                    </div>
+                    <div class="col">
+                       <div class="form-group">
+                           <button class="btn btn-primary">Rechercher</button>
+                       </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
