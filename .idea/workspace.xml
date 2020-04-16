@@ -2,17 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4665b065-b70c-45a7-ad98-96628c8d053e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/composerJson.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/property/edit.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/property/new.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/translations/forms.fr.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Agence.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Agence.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/translation.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/translation.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/man" beforeDir="false" afterPath="$PROJECT_DIR$/man" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Property.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Property.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +67,6 @@
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
-      <path value="$PROJECT_DIR$/vendor/easycorp/easy-log-handler" />
       <path value="$PROJECT_DIR$/vendor/ocramius/package-versions" />
       <path value="$PROJECT_DIR$/vendor/ocramius/proxy-manager" />
       <path value="$PROJECT_DIR$/vendor/jdorn/sql-formatter" />
@@ -168,6 +170,8 @@
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/vendor/twig/extra-bundle" />
       <path value="$PROJECT_DIR$/vendor/cocur/slugify" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
     </include_path>
   </component>
   <component name="ProjectId" id="1ZUTtUaQIKaYNCn37EtApBXJWJS" />
@@ -178,11 +182,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/admin/property" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
   </component>
   <component name="RecentsManager">
@@ -201,7 +206,12 @@
       <list>
         <serviceView>
           <treeState>
-            <expand />
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+            </expand>
             <select />
           </treeState>
         </serviceView>
@@ -220,7 +230,16 @@
       <updated>1584892887558</updated>
       <workItem from="1584892888730" duration="24582000" />
       <workItem from="1585339955491" duration="10084000" />
-      <workItem from="1585865678315" duration="1364000" />
+      <workItem from="1585865678315" duration="11568000" />
+      <workItem from="1585946735891" duration="5862000" />
+      <workItem from="1586205643074" duration="2433000" />
+      <workItem from="1586327135906" duration="2036000" />
+      <workItem from="1586414377825" duration="629000" />
+      <workItem from="1586688195730" duration="24000" />
+      <workItem from="1586735855951" duration="663000" />
+      <workItem from="1586761492089" duration="1203000" />
+      <workItem from="1587024486730" duration="318000" />
+      <workItem from="1587024882241" duration="9108000" />
     </task>
     <servers />
   </component>
@@ -228,10 +247,14 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="555" y="219" width="810" height="680" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584900974202">
+    <state x="555" y="219" width="810" height="680" key="#Notifications" timestamp="1585935449972">
       <screen x="0" y="31" width="1920" height="1049" />
     </state>
-    <state x="555" y="219" width="810" height="680" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.31.1920.1049@0.31.1920.1049" timestamp="1584900974202" />
+    <state x="555" y="219" width="810" height="680" key="#Notifications/0.31.1920.1049@0.31.1920.1049" timestamp="1585935449972" />
+    <state x="555" y="219" width="810" height="680" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587049741650">
+      <screen x="0" y="31" width="1920" height="1049" />
+    </state>
+    <state x="555" y="219" width="810" height="680" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.31.1920.1049@0.31.1920.1049" timestamp="1587049741650" />
     <state x="681" y="362" width="558" height="394" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1584893392455">
       <screen x="0" y="31" width="1920" height="1049" />
     </state>
@@ -240,10 +263,10 @@
       <screen x="0" y="31" width="1920" height="1049" />
     </state>
     <state x="752" y="245" width="416" height="628" key="#com.intellij.ide.util.MemberChooser/0.31.1920.1049@0.31.1920.1049" timestamp="1585381356065" />
-    <state x="743" y="316" width="434" height="487" key="FileChooserDialogImpl" timestamp="1585045182501">
+    <state x="743" y="316" width="434" height="487" key="FileChooserDialogImpl" timestamp="1586688213157">
       <screen x="0" y="31" width="1920" height="1049" />
     </state>
-    <state x="743" y="316" width="434" height="487" key="FileChooserDialogImpl/0.31.1920.1049@0.31.1920.1049" timestamp="1585045182501" />
+    <state x="743" y="316" width="434" height="487" key="FileChooserDialogImpl/0.31.1920.1049@0.31.1920.1049" timestamp="1586688213157" />
     <state width="257" height="520" key="HiddenNamespacesPopup" timestamp="1584901733233">
       <screen x="0" y="31" width="1920" height="1049" />
     </state>
@@ -252,10 +275,14 @@
       <screen x="0" y="31" width="1920" height="1049" />
     </state>
     <state x="449" y="193" width="1022" height="733" key="SettingsEditor/0.31.1920.1049@0.31.1920.1049" timestamp="1585343578062" />
-    <state x="620" y="385" key="com.intellij.ide.util.TipDialog" timestamp="1585865813162">
+    <state x="620" y="385" key="com.intellij.ide.util.TipDialog" timestamp="1587025466314">
       <screen x="0" y="31" width="1920" height="1049" />
     </state>
-    <state x="620" y="385" key="com.intellij.ide.util.TipDialog/0.31.1920.1049@0.31.1920.1049" timestamp="1585865813162" />
+    <state x="620" y="385" key="com.intellij.ide.util.TipDialog/0.31.1920.1049@0.31.1920.1049" timestamp="1587025466314" />
+    <state x="619" y="255" key="run.anything.popup" timestamp="1585929243415">
+      <screen x="0" y="31" width="1920" height="1049" />
+    </state>
+    <state x="619" y="255" key="run.anything.popup/0.31.1920.1049@0.31.1920.1049" timestamp="1585929243415" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

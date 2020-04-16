@@ -38,3 +38,99 @@ URl: https://github.com/cocur/slugify
 $ composer require cocur/slugify
 
 add "use Cocur\Slugify\Slugify;" in Entity
+
+________Secutity_____________________________
+config/packages/security.yaml
+
+1. create User entity
+    $ php bin/console make:entity User
+        -> username
+        -> password
+
+2. Generate migration
+    $  php bin/console make:migration
+
+3. Migration
+    $ php bin/console doctrine:migrations:migrate
+
+4. Add  implements UserInterface _--> class User     (use Symfony\Component\Security\Core\User\UserInterface;)
+5. Add methods
+
+6. For session
+    class User implements UserInterface,\Serializable
+7. Add methods
+
+
+8. Create securityController
+
+9. set up security/login.html.twig
+
+10. Create logout route --> (config/routes.yaml)
+
+11. user fixture
+
+
+__________________DEBUGER LA CONFIG DES COMPOSANTS___________________
+    $ php bin/console config:dump-reference security
+
+
+ _____________________FIXTURES ------------------------- (composer require orm-fixtures --dev )
+
+ 1. create fixtures
+    $ php bin/console make:fixtures
+
+    * name : UserFixtures
+
+2. setup Fixture   (src/DataFixtures/UserFixtures.php)
+
+3. Load fixture
+    $ php bin/console doctrine:fixtures:load --append
+
+
+
+
+
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        from_database:
+            entity:
+                class: App\Entity\User
+                property: username
+
+        #users_in_memory:
+            #memory:
+                #users:
+                    #demo:
+                        #password: demo
+                        #roles: ROLE_ADMIN
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: lazy
+            logout:
+                path: /logout
+                target: /
+            #provider: users_in_memory
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+            #http_basic: true
+            form_login:
+                check_path: login
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+         - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
+
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+            cost: 12
