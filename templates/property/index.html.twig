@@ -6,7 +6,7 @@
     <div class="container mt-4">
         <h1>Gomab Agency</h1>
 
-        <p>Voir tous nos biens</p>
+        <p>Voir tous nos biens ({{ totalProperties }})</p>
 
         <div class="jumbotron">
             <div class="container">
@@ -17,6 +17,9 @@
                     </div>
                     <div class="col">
                         {{ form_row(form.maxPrice) }}
+                    </div>
+                    <div class="col">
+                        {{ form_row(form.options) }}
                     </div>
                     <div class="col">
                        <div class="form-group">
@@ -42,4 +45,5 @@
         </div>
 
     </div>
+
 {% endblock %}

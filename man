@@ -194,3 +194,91 @@ __________________DEBUGER LA CONFIG DES COMPOSANTS___________________
                 </div>
             </div>
         </div>
+
+
+----------------------------------------------------
+9. Gestion des options
+    - Creer entité pour les options
+        $ php bin/console make:entity
+        Option
+        * name | properties/relation/Property/ManyToMany/yes
+
+    - Migration to bdd
+
+    - make crud
+        * $  php bin/console make:crud Option
+
+    - setup --> <<src/Controller/Admin/AdminOptionController.php
+
+    - Setup views
+        templates/admin/option
+
+    - Add option --> src/Form/PropertyType.php
+        //Add option
+        ->add('options', EntityType::class, [
+            'class' => Option::class,
+            'choice_label' => 'name',
+            'multiple' => true
+        ])
+        //End add option
+
+    - set up Option and Property entity (mapped...)
+    - Rollback migration
+    - New Migration
+    - Add select2.js (templates/base.html.twig, templates/admin/property/new.html.twig, templates/admin/property/edit.html.twig)
+
+
+    - add champ option dans le formulaire PropertySearchType
+        //Champ add options
+                    ->add('options', EntityType::class, [
+                        'required' => false,
+                        'label' => false,
+                        'class' => Option::class,
+                        'choice_label'  => 'name',
+                        'multiple'  => true
+                    ])
+
+
+
+    - Add variable $optuion --> src/Entity/PropertySearch.php, constructor et get et set
+         /**
+             * @var ArrayCollection
+             */
+            private $options;
+
+
+               public function __construct()
+                {
+                    $this->options = new ArrayCollection();
+                }
+
+
+
+    -> add  --> src/Repository/PropertyRepository.php
+
+      if ($search->getOptions()->count() > 0){
+                $k = 0;
+
+                foreach ($search->getOptions() as $option){
+                    $k++;
+                    $query = $query
+                            ->andWhere(":option$k MEMBER OF p.options")
+                            ->setParameter("option$k", $option);
+                }
+            }
+
+-------------------------------
+Rollback : retour arriere migration
+
+1. Infos migration
+    $ php bin/console doctrine:migrations:status
+2. Migrer vers la derniere version (copier le timestemp de la derniere version "20200403162650")
+    $ php bin/console doctrine:migrations:migrate 20200403162650
+
+3. Supprimer la derniere migration (le dernier fichier) dans Migrations
+
+4. Make migration
+    $  bin/console make:migration
+5. migrer vers la derniere version
+    $ php bin/console doctrine:migrations:migrate
+
