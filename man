@@ -282,3 +282,95 @@ Rollback : retour arriere migration
 5. migrer vers la derniere version
     $ php bin/console doctrine:migrations:migrate
 
+________________________________________________________________________________________________________________________
+10- Image à la une
+
+1. Install bundle uploader
+    $ composer require vich/uploader-bundle
+
+    https://github.com/dustin10/VichUploaderBundle/blob/master/docs/usage.md
+
+2. set up --> config/packages/vich_uploader.yaml
+
+3. Set up Property Entity
+
+    - use Symfony\Component\HttpFoundation\File\File;
+      use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+    -/**
+      * @ORM\Entity(repositoryClass="App\Repository\PropertyRepository")
+      * @UniqueEntity("title")
+      * @Vich\Uploadable   <-------------
+      */
+
+      - /**
+             * @Vich\UploadableField(mapping="property_image", fileNameProperty="filename")
+             *
+             * @var File|null
+             */
+            private $imageFile;
+
+            /**
+             * @ORM\Column(type="string", length=255)
+             *
+             * @var string|null
+             */
+            private $filename;
+
+     - Getter and setter
+
+
+4. Add champ filename dans la bdd
+    $ php bin/console make:migration
+
+    $ php bin/console doctrine:migrations:migrate
+
+5. Add imageFile champ dans le formulaire --> PropertyType
+     ->add('imageFile', FileType::class, [
+        'required' => false
+     ])
+
+ 6. Add champ image --> templates/admin/property/_form.html.twig
+
+7. Add champ updatedAt to property entity
+    $ php bin/console make:entity Property
+      --> updated_at
+
+8. Migration
+
+9. set up setImage --> src/Entity/Property.php
+
+      public function setImageFile(?File $imageFile): Property
+        {
+            $this->imageFile = $imageFile;
+
+            //Update Image
+            if ($this->imageFile instanceof UploadedFile){
+                $this->updated_at = new \DateTime('now');
+            }
+
+            return $this;
+        }
+10. Afficher l'image --> templates/property/_property.html.twig
+     {% if property.filename %}
+            <img src="{{ vich_uploader_asset(property, 'imageFile') }}" alt="card-img-top" style="width: 100%; height: auto">
+     {% endif %}
+
+11. Redimensionner l'image | https://packagist.org/packages/liip/imagine-bundle
+    a. Install bundle
+    $ composer require liip/imagine-bundle
+
+    b. Setup --> config/packages/liip_imagine.yaml
+
+12. Install php extension
+    $ sudo apt-get install php7.3-gd
+
+13. Supprimer les images sauvegarder en cache
+    a. setup subscriber --> src/Listener/ImageCacheSubscriber.php
+    b. setup service --> config/services.yaml
+        App\Listener\ImageCacheSubscriber:
+                tags:
+                    - { name: doctrine.event_subscriber }
+
+sudo service mysql start
+sudo service apache2 start
